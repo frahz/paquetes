@@ -2,6 +2,11 @@ name: build packages
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "pkgs"
+      - "**.lock"
+      - ".github/workflows/build.yml"
 
 jobs:
   build:
