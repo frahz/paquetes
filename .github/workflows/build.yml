@@ -1,0 +1,26 @@
+name: build packages
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: "Build packages and upload to cache"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v16
+        with:
+          name: frahz
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Build packages
+        run: |
+          nix run \
+            github:Mic92/nix-fast-build -- \
+            --no-nom \
+            --skip-cached \
+            --systems '${{ matrix.system }}' \
+            --option accept-flake-config true \
+            --flake '.#hydraJobs.${{ matrix.system }}'
