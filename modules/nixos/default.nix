@@ -1,0 +1,3 @@
+self: {
+  nemui = ./nemui.nix;
+}
