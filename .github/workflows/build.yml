@@ -21,6 +21,5 @@ jobs:
             github:Mic92/nix-fast-build -- \
             --no-nom \
             --skip-cached \
-            --systems '${{ matrix.system }}' \
             --option accept-flake-config true \
-            --flake '.#hydraJobs.${{ matrix.system }}'
+            --flake '.#hydraJobs.x86_64-linux'
