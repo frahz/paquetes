@@ -1,4 +1,4 @@
 self: {
-  nemui = ./nemui.nix;
-  raulyrs = ./raulyrs.nix;
+  nemui = ./nemui.nix self;
+  raulyrs = ./raulyrs.nix self;
 }
