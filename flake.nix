@@ -23,9 +23,10 @@
       packages = forAllSystems (
         pkgs:
         packagesFromDirectoryRecursive {
-          callPackage = callPackageWith (pkgs);
+          inherit (pkgs) callPackage;
           directory = ./pkgs;
-        } // {
+        }
+        // {
           default = pkgs.emptyFile;
         }
       );
