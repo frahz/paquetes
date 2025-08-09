@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "pkgs"
-      - "**.lock"
+      - "pkgs/**"
+      - "flake.lock"
       - ".github/workflows/build.yml"
 
 jobs:
