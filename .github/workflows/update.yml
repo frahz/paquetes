@@ -1,0 +1,32 @@
+name: Bump Flake Inputs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 1,4" # runs on mondays and thursdays
+
+jobs:
+  update:
+    if: github.repository == "frahz/paquetes"
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Lix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Setup Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "57733316+github-actions[bot]@users.noreply.github.com"
+
+      - name: Update Lockfile
+        run: nix flake update --commit-lock-file
+
+      - name: Push changes
+        run: git push origin main
