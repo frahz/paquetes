@@ -41,6 +41,8 @@ in
         DynamicUser = true;
         ExecStart = lib.getExe cfg.package;
 
+        AmbientCapabilities = [ "CAP_SYS_BOOT" ];
+        CapabilityBoundingSet = [ "CAP_SYS_BOOT" ];
         LockPersonality = true;
         NoNewPrivileges = true;
         PrivateDevices = true;
@@ -58,7 +60,10 @@ in
         ProtectSystem = "strict";
         RestrictRealtime = true;
         SystemCallArchitectures = "native";
-        SystemCallFilter = [ "@system-service" ];
+        SystemCallFilter = [
+          "@system-service"
+          "reboot"
+        ];
         UMask = "0077";
       };
     };
