@@ -38,7 +38,7 @@ in
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "simple";
-        DynamicUser = true;
+        # DynamicUser = true;
         ExecStart = lib.getExe cfg.package;
 
         # AmbientCapabilities = [ "CAP_SYS_BOOT" ];
