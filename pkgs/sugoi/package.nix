@@ -3,6 +3,7 @@
   rustPlatform,
   makeWrapper,
   sqlite,
+  nix-update-script,
   fetchFromGitHub,
   ...
 }:
@@ -31,6 +32,8 @@ rustPlatform.buildRustPackage {
     wrapProgram $out/bin/sugoi \
       --set ASSETS_DIR $out/share/assets
   '';
+
+  passthru.updateScript = nix-update-script { };
 
   meta = {
     description = "small web server for waking up and putting my server to sleep.";

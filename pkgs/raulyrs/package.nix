@@ -5,6 +5,7 @@
   openssl,
   yt-dlp,
   libopus,
+  nix-update-script,
   fetchFromGitHub,
   ...
 }:
@@ -30,6 +31,13 @@ rustPlatform.buildRustPackage {
     openssl
     libopus
   ];
+
+  passthru.updateScript = nix-update-script {
+    extraArgs = [
+      "--version"
+      "branch=HEAD"
+    ];
+  };
 
   meta = {
     description = "rauly.rs discord bot";

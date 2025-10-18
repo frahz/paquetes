@@ -29,7 +29,7 @@ rustPlatform.buildRustPackage {
     description = "Linux CLI tool for controlling Moondrop USB audio dongles.";
     homepage = "https://github.com/frahz/mdrop";
     license = lib.licenses.mit;
-    maintainers = [ "frahz" ];
+    maintainers = [ { name = "frahz"; } ];
     mainProgram = "mdrop";
   };
 }

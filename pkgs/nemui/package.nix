@@ -1,6 +1,7 @@
 {
   lib,
   rustPlatform,
+  nix-update-script,
   fetchFromGitHub,
   ...
 }:
@@ -19,6 +20,8 @@ rustPlatform.buildRustPackage {
   };
 
   cargoHash = "sha256-zP6ABfX8Jveei/v/2JSo98mvqiRs2kWObpa7jVjNimg=";
+
+  passthru.updateScript = nix-update-script { };
 
   meta = {
     description = "This utility is meant to run in the your main server. Once it receives a specific byte over it will put the server to sleep.";
