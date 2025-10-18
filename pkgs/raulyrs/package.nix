@@ -10,7 +10,7 @@
   ...
 }:
 let
-  version = "0.2.0-2025-08-06";
+  version = "0.2.1-unstable-2025-10-18";
 in
 rustPlatform.buildRustPackage {
   pname = "raulyrs";
@@ -19,11 +19,11 @@ rustPlatform.buildRustPackage {
   src = fetchFromGitHub {
     owner = "frahz";
     repo = "rauly.rs";
-    rev = "ed7ad008106c772a298dd39c987e25b7d6ee78af";
-    hash = "sha256-R9KjQYN6iPqU89M8TILHZooX1pUddTMn1wMrDe+Jlcw=";
+    rev = "b37043c72037d33883a9a4304394ac9ba5ddded3";
+    hash = "sha256-O56cOxf910HmfUNCAUZEJdQyUsQsVtXPa647pPlaPI8=";
   };
 
-  cargoHash = "sha256-APEs+pWF97EZlWvcqU3OZwIJjU4OLDwnRd/hmmKv6MM=";
+  cargoHash = "sha256-IKyuLLQ/iPf5MPfSGNr3I1rrm7lHfkY6++t6JE01pu8=";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [
@@ -43,7 +43,7 @@ rustPlatform.buildRustPackage {
     description = "rauly.rs discord bot";
     homepage = "https://github.com/frahz/rauly.rs";
     licenses = lib.licenses.mit;
-    maintainers = [ "frahz" ];
+    maintainers = [ { name = "frahz"; } ];
     mainProgram = "raulyrs";
   };
 }
