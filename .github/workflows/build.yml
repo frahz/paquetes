@@ -15,7 +15,7 @@ jobs:
     name: "Build packages and upload to cache"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: DeterminateSystems/nix-installer-action@main
       - name: Setup Cachix
         uses: cachix/cachix-action@v16

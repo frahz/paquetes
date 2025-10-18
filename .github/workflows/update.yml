@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install Lix
         uses: DeterminateSystems/nix-installer-action@main
@@ -27,6 +27,9 @@ jobs:
 
       - name: Update Lockfile
         run: nix flake update --commit-lock-file
+
+      - name: Update packages
+        run: nix run .#update
 
       - name: Push changes
         run: git push origin main
