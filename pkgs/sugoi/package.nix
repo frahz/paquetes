@@ -8,7 +8,7 @@
   ...
 }:
 let
-  version = "0.5.1";
+  version = "0.5.2";
 in
 rustPlatform.buildRustPackage {
   pname = "sugoi";
@@ -18,10 +18,10 @@ rustPlatform.buildRustPackage {
     owner = "frahz";
     repo = "sugoi";
     rev = "v${version}";
-    hash = "sha256-tk0KvETnGngLNoA1L4ZzKzpoKRfni3YHDRiaWcG+w+c=";
+    hash = "sha256-bST04v00t8Z2wfGPCFhZXy6shb8vUmDd3QKeYKkS8QE=";
   };
 
-  cargoHash = "sha256-imhGGh7gNUq9FRg4Sw2yn9MV5XzgBlYnHsaSot5Thkc=";
+  cargoHash = "sha256-BFwDpa+/o5I0fzCZa6sstBSt7CSmofbNn5Z4/ZL5wRA=";
 
   nativeBuildInputs = [ makeWrapper ];
   buildInputs = [ sqlite ];
@@ -40,7 +40,7 @@ rustPlatform.buildRustPackage {
     homepage = "https://git.iatze.cc/frahz/sugoi";
     changelog = "https://git.iatze.cc/frahz/sugoi/releases/tag/v${version}";
     license = lib.licenses.mit;
-    maintainers = [ "frahz" ];
+    maintainers = [ { name = "frahz"; } ];
     mainProgram = "sugoi";
   };
 }
