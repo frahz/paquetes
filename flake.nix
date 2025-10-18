@@ -18,13 +18,7 @@
 
     in
     {
-      packages = forAllSystems (
-        pkgs:
-        import ./default.nix { inherit pkgs; }
-        # // {
-        #   default = pkgs.emptyFile;
-        # }
-      );
+      packages = forAllSystems (pkgs: import ./default.nix { inherit pkgs; });
 
       nixosModules = import ./modules/nixos self;
 
@@ -61,6 +55,14 @@
               );
             }
           );
+        };
+      });
+
+      devShells = forAllSystems (pkgs: {
+        default = pkgs.mkShellNoCC {
+          packages = [
+            pkgs.nix-update
+          ];
         };
       });
     };
