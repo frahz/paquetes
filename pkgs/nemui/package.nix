@@ -6,7 +6,7 @@
   ...
 }:
 let
-  version = "0.3.0";
+  version = "0.3.1";
 in
 rustPlatform.buildRustPackage {
   pname = "nemui";
@@ -16,10 +16,10 @@ rustPlatform.buildRustPackage {
     owner = "frahz";
     repo = "nemui";
     rev = "v${version}";
-    hash = "sha256-rbKSO0j0Fr3WcXzUSyYgcIqiQqgTg2Mzla1Et62HVQ0=";
+    hash = "sha256-6LO9nFW4BlnAGYdWLnNugraswROeIpA62BLyClBwfOs=";
   };
 
-  cargoHash = "sha256-zP6ABfX8Jveei/v/2JSo98mvqiRs2kWObpa7jVjNimg=";
+  cargoHash = "sha256-of66sIP27c5R9OndYZ0oWyE8IeImMLj7LLEBS9UHzoc=";
 
   passthru.updateScript = nix-update-script { };
 
@@ -28,7 +28,7 @@ rustPlatform.buildRustPackage {
     homepage = "https://git.iatze.cc/frahz/nemui";
     changelog = "https://git.iatze.cc/frahz/nemui/releases/tag/v${version}";
     license = lib.licenses.mit;
-    maintainers = [ "frahz" ];
+    maintainers = [ { name = "frahz"; } ];
     mainProgram = "nemui";
   };
 }
