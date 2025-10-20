@@ -16,8 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-        with:
-          persist-credentials: false
+        # with:
+        #   persist-credentials: false
 
       - name: Install Lix
         uses: DeterminateSystems/nix-installer-action@786fff0690178f1234e4e1fe9b536e94f5433196 # v20
