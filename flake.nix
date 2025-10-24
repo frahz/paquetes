@@ -68,7 +68,7 @@
     };
 
   nixConfig = {
-    extra-substituters = [ "https://frahz.cachix.org" ];
+    extra-substituters = [ "https://frahz-pkgs.cachix.org" ];
     extra-trusted-public-keys = [
       "frahz-pkgs.cachix.org-1:76ecCnIcJvDeJzHqFyAI6ElUndNZK0RXAO3HQrmV468="
     ];
