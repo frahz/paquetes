@@ -3,7 +3,7 @@ name: Bump Flake Inputs
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * 1,4" # runs on mondays and thursdays
+    - cron: "0 0 * * *"
 
 jobs:
   update:
