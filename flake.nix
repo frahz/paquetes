@@ -14,7 +14,17 @@
         "x86_64-linux"
       ];
 
-      forAllSystems = f: lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
+      forAllSystems =
+        f:
+        lib.genAttrs systems (
+          system:
+          f (
+            import nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+            }
+          )
+        );
 
     in
     {
