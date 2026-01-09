@@ -3,6 +3,7 @@
   appimageTools,
   fetchurl,
   makeWrapper,
+  writeScript,
   ...
 }:
 appimageTools.wrapType2 rec {
@@ -33,7 +34,9 @@ appimageTools.wrapType2 rec {
     '';
 
   passthru = {
-    updateScript = ./update.sh;
+    updateScript = writeScript "hayase-update" (
+      builtins.readFile ./update.sh
+    );
   };
 
   meta = {
