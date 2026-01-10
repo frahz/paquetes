@@ -45,22 +45,23 @@
             pkgs.writeShellApplication {
               name = "update";
 
+              runtimeInputs = [
+                pkgs.nix-update
+              ];
+
               text = lib.concatStringsSep "\n" (
                 lib.mapAttrsToList (
                   name: pkg:
-                  if pkg ? updateScript && (lib.isList pkg.updateScript) then
-                    lib.escapeShellArgs (
-                      if (lib.match "nix-update|.*/nix-update" (lib.head pkg.updateScript) != null) then
-                        pkg.updateScript
-                        ++ [
-                          "--commit"
-                          name
-                        ]
-                      else
-                        pkg.updateScript
-                    )
+                  if pkg ? updateScript && pkg.updateScript != null then
+                    lib.escapeShellArgs [
+                      "nix-update"
+                      "--flake"
+                      "--use-update-script"
+                      "--commit"
+                      name
+                    ]
                   else
-                    toString pkg.updateScript or "# no update script for ${name}"
+                    "# no update script for ${name}"
                 ) self.packages.${pkgs.stdenv.hostPlatform.system}
               );
             }

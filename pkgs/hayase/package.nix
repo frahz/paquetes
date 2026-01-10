@@ -34,9 +34,7 @@ appimageTools.wrapType2 rec {
     '';
 
   passthru = {
-    updateScript = writeScript "hayase-update" (
-      builtins.readFile ./update.sh
-    );
+    updateScript = writeScript "hayase-update" (builtins.readFile ./update.sh);
   };
 
   meta = {
