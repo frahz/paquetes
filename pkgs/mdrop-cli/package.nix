@@ -6,7 +6,7 @@
   ...
 }:
 let
-  version = "0.3.0-2025-08-07";
+  version = "0.4.0-unstable-2026-02-12";
 in
 rustPlatform.buildRustPackage {
   pname = "mdrop-cli";
@@ -15,11 +15,11 @@ rustPlatform.buildRustPackage {
   src = fetchFromGitHub {
     owner = "frahz";
     repo = "mdrop";
-    rev = "7b2eb5c385ec3e1dc3b1d48b1e75137b8a4e125b";
-    hash = "sha256-wdxASiU2snQZHh/UgO5Blitu2kQOzkK4TPNH2jgLBQ0=";
+    rev = "98d4e36e70aea3a3fb3b390c1523ade1e3da9bc0";
+    hash = "sha256-6QuNu3kJl8gs50xUCfE3k6amLOqPU4c1OoBChkBb3Ks=";
   };
 
-  cargoHash = "sha256-fihzWk9RNZwEuW1qlGZFlWIZB6PBLUlYZd1Nrd/PvQs=";
+  cargoHash = "sha256-B11v2A079auETcFxBcLlDcrEobCpf2V9hkIDRAppqRE=";
 
   cargoBuildFlags = [
     "--bin"
