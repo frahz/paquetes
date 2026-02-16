@@ -2,7 +2,7 @@
   lib,
   rustPlatform,
   callPackage,
-  makeWrapper,
+  stdenv,
   libGL,
   libxkbcommon,
   wayland,
@@ -10,12 +10,6 @@
 let
   # TODO: figure out how to fix this
   mdrop-cli = callPackage ../mdrop-cli/package.nix { };
-
-  libPath = lib.makeLibraryPath [
-    libGL
-    libxkbcommon
-    wayland
-  ];
 in
 rustPlatform.buildRustPackage {
   pname = "mdrop-gui";
@@ -26,10 +20,15 @@ rustPlatform.buildRustPackage {
     "mdrop-gui"
   ];
 
-  nativeBuildInputs = [ makeWrapper ];
-
-  postInstall = ''
-    wrapProgram $out/bin/mdrop-gui --prefix LD_LIBRARY_PATH : ${libPath}
+  postFixup = lib.optionalString stdenv.hostPlatform.isLinux ''
+    patchelf $out/bin/mdrop-gui \
+      --add-rpath ${
+        lib.makeLibraryPath [
+          libGL
+          libxkbcommon
+          wayland
+        ]
+      }
   '';
 
   meta = {

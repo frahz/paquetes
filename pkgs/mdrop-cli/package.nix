@@ -1,6 +1,7 @@
 {
   lib,
   rustPlatform,
+  nix-update-script,
   fetchFromGitHub,
   ...
 }:
@@ -24,6 +25,13 @@ rustPlatform.buildRustPackage {
     "--bin"
     "mdrop"
   ];
+
+  passthru.updateScript = nix-update-script {
+    extraArgs = [
+      "--version"
+      "branch=HEAD"
+    ];
+  };
 
   meta = {
     description = "Linux CLI tool for controlling Moondrop USB audio dongles.";
