@@ -3,7 +3,7 @@
   appimageTools,
   fetchurl,
   widevine-cdm,
-  nix-update-script,
+  writeScript,
   ...
 }:
 appimageTools.wrapAppImage rec {
@@ -34,7 +34,7 @@ appimageTools.wrapAppImage rec {
     "--ro-bind-try /etc/xdg/ /etc/xdg/"
   ];
 
-  passthru.updateScript = nix-update-script { };
+  passthru.updateScript = writeScript "helium-update" (builtins.readFile ./update.sh);
 
   meta = {
     description = "Helium Browser";
