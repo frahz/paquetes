@@ -50,6 +50,7 @@ in
         PrivateTmp = true;
         PrivateUsers = true;
         ProtectClock = true;
+        ProtectControlGroups = true;
         ProtectHome = true;
         ProtectHostname = true;
         ProtectKernelLogs = true;
@@ -57,10 +58,11 @@ in
         ProtectKernelTunables = true;
         ProtectProc = "invisible";
         ProtectSystem = "strict";
+        RestrictNamespaces = "uts ipc pid user cgroup";
         RestrictRealtime = true;
         RestrictSUIDSGID = true;
-        SystemCallArchitectures = "native";
-        SystemCallFilter = [ "@system-service" ];
+        # SystemCallArchitectures = "native";
+        # SystemCallFilter = [ "@system-service" ];
       };
     };
 
