@@ -32,16 +32,35 @@ in
   config = mkIf cfg.enable {
     systemd.services.raulyrs = {
       description = "rauly.rs discord bot";
-      after = [ "network-online.target" ];
-      wants = [ "network-online.target" ];
+      after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       path = [ pkgs.yt-dlp ];
       serviceConfig = {
         Type = "simple";
         User = "raulyrs";
+        StateDirectory = "raulyrs";
         ExecStart = lib.getExe cfg.package;
         EnvironmentFile = cfg.environmentFile;
-        Restart = "on-failure";
+        Restart = "always";
+
+        LockPersonality = true;
+        NoNewPrivileges = true;
+        PrivateDevices = true;
+        PrivateIPC = true;
+        PrivateTmp = true;
+        PrivateUsers = true;
+        ProtectClock = true;
+        ProtectHome = true;
+        ProtectHostname = true;
+        ProtectKernelLogs = true;
+        ProtectKernelModules = true;
+        ProtectKernelTunables = true;
+        ProtectProc = "invisible";
+        ProtectSystem = "strict";
+        RestrictRealtime = true;
+        RestrictSUIDSGID = true;
+        SystemCallArchitectures = "native";
+        SystemCallFilter = [ "@system-service" ];
       };
     };
 
