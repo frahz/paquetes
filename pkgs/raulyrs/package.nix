@@ -10,7 +10,7 @@
   ...
 }:
 let
-  version = "0.2.1-unstable-2025-10-18";
+  version = "0.2.1-unstable-2026-04-29";
 in
 rustPlatform.buildRustPackage {
   pname = "raulyrs";
@@ -19,11 +19,11 @@ rustPlatform.buildRustPackage {
   src = fetchFromGitHub {
     owner = "frahz";
     repo = "rauly.rs";
-    rev = "b37043c72037d33883a9a4304394ac9ba5ddded3";
-    hash = "sha256-O56cOxf910HmfUNCAUZEJdQyUsQsVtXPa647pPlaPI8=";
+    rev = "b91495d4ec8ee719fa8dae0884f47a4e92554619";
+    hash = "sha256-4lqUnPsMHa52cKMAu/7Zj9nnBf4ewbAty6/pMF1jFZA=";
   };
 
-  cargoHash = "sha256-IKyuLLQ/iPf5MPfSGNr3I1rrm7lHfkY6++t6JE01pu8=";
+  cargoHash = "sha256-pJecHr+Zkmou71MqFEWKD48kPFZvhvTApjWtRiwDnYY=";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [
