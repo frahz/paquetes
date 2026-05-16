@@ -8,11 +8,11 @@
 }:
 appimageTools.wrapType2 rec {
   pname = "hayase";
-  version = "6.4.67";
+  version = "6.4.69";
 
   src = fetchurl {
     url = "https://api.hayase.watch/files/linux-hayase-${version}-linux.AppImage";
-    hash = "sha256-npUSNtiCKTcAK2nOta225W9+07Rsm235vsiAAAALVFU=";
+    hash = "sha256-sFw3oimI+2iNknAyJ+8WrhL6wbcHcqkOepcgLSpRHlY=";
   };
 
   nativeBuildInputs = [
