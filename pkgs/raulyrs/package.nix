@@ -10,7 +10,7 @@
   ...
 }:
 let
-  version = "0-unstable-2026-04-29";
+  version = "0.2.1-unstable-2026-04-29";
 in
 rustPlatform.buildRustPackage {
   pname = "raulyrs";
