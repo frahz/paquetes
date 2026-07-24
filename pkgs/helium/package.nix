@@ -8,13 +8,13 @@
 }:
 appimageTools.wrapAppImage rec {
   pname = "helium";
-  version = "0.14.7.1";
+  version = "0.14.8.2";
 
   src = appimageTools.extract {
     inherit pname version;
     src = fetchurl {
       url = "https://github.com/imputnet/helium-linux/releases/download/${version}/helium-${version}-x86_64.AppImage";
-      hash = "sha256-JPsCvue71hlyS9woHsauX5xM/2PUJ+n8VEjOFquUDno=";
+      hash = "sha256-7Kde6Crsr6LdKnfER+6yE7JkU6+10xXtJ1GQEHhBtqg=";
     };
 
     postExtract = ''
