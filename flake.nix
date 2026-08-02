@@ -1,7 +1,7 @@
 {
   description = "A very basic flake for packages";
 
-  inputs.nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
+  inputs.nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
 
   outputs =
     { self, nixpkgs }:
