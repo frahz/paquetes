@@ -11,6 +11,6 @@ let
   inherit (lib.filesystem) packagesFromDirectoryRecursive;
 in
 packagesFromDirectoryRecursive {
-  inherit (pkgs) callPackage;
+  inherit (pkgs) callPackage newScope;
   directory = ./pkgs;
 }

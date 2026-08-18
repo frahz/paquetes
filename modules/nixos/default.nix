@@ -1,5 +1,5 @@
-self: {
-  nemui = import ./nemui.nix self;
-  raulyrs = import ./raulyrs.nix self;
-  sugoi = import ./sugoi.nix self;
+{
+  nemui = import ./nemui.nix;
+  raulyrs = import ./raulyrs.nix;
+  sugoi = import ./sugoi.nix;
 }

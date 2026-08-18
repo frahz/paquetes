@@ -1,4 +1,3 @@
-self:
 {
   lib,
   pkgs,
@@ -6,7 +5,7 @@ self:
   ...
 }:
 let
-  inherit (lib) mkIf mkOption mkEnableOption;
+  inherit (lib) mkEnableOption mkIf;
 
   cfg = config.services.nemui;
 in
@@ -15,21 +14,14 @@ in
     enable = mkEnableOption "nemui daemon";
     package = lib.mkOption {
       type = lib.types.package;
-      default = self.packages.${pkgs.stdenv.hostPlatform.system}.nemui;
+      default = pkgs.callPackage ../../pkgs/nemui/package.nix { };
       description = "The package to use for nemui";
     };
-    port = mkOption {
-      type = lib.types.port;
-      default = 8253;
-      description = "The port to open for nemui";
-    };
+    openFirewall = mkEnableOption "opening nemui's TCP port in the firewall";
   };
 
   config = mkIf cfg.enable {
-    networking.firewall = {
-      allowedTCPPorts = [ cfg.port ];
-      allowedUDPPorts = [ cfg.port ];
-    };
+    networking.firewall.allowedTCPPorts = mkIf cfg.openFirewall [ 8253 ];
 
     systemd.services.nemui = {
       enable = true;

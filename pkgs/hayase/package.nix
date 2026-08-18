@@ -4,7 +4,6 @@
   fetchurl,
   makeWrapper,
   writeScript,
-  ...
 }:
 appimageTools.wrapType2 (finalAttrs: {
   pname = "hayase";
@@ -35,10 +34,12 @@ appimageTools.wrapType2 (finalAttrs: {
   };
 
   meta = {
-    description = "Hayase - Torrent streaming made simple";
+    description = "Torrent streaming application";
     homepage = "https://hayase.watch";
     changelog = "https://hayase.watch/changelog";
     license = lib.licenses.bsl11;
+    maintainers = [ { name = "frahz"; } ];
     mainProgram = "hayase";
+    platforms = [ "x86_64-linux" ];
   };
 })

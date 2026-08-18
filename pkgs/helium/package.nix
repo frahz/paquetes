@@ -4,7 +4,6 @@
   fetchurl,
   widevine-cdm,
   writeScript,
-  ...
 }:
 appimageTools.wrapType2 (finalAttrs: {
   pname = "helium";
@@ -31,7 +30,7 @@ appimageTools.wrapType2 (finalAttrs: {
   passthru.updateScript = writeScript "helium-update" (builtins.readFile ./update.sh);
 
   meta = {
-    description = "Helium Browser";
+    description = "Chromium-based web browser with built-in privacy features";
     homepage = "https://github.com/imputnet/helium-linux";
     downloadPage = "https://github.com/imputnet/helium-linux/releases/tag/${finalAttrs.version}";
     changelog = "https://github.com/imputnet/helium-linux/releases/tag/${finalAttrs.version}";
@@ -40,6 +39,7 @@ appimageTools.wrapType2 (finalAttrs: {
       bsd3
     ];
     sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
+    maintainers = [ { name = "frahz"; } ];
     mainProgram = "helium";
     platforms = [ "x86_64-linux" ];
   };

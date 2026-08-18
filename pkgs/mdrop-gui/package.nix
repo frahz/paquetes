@@ -1,19 +1,17 @@
 {
   lib,
   rustPlatform,
-  callPackage,
   stdenv,
   libGL,
   libxkbcommon,
+  mdrop-cli,
   wayland,
 }:
-let
-  # TODO: figure out how to fix this
-  mdrop-cli = callPackage ../mdrop-cli/package.nix { };
-in
 rustPlatform.buildRustPackage {
   pname = "mdrop-gui";
   inherit (mdrop-cli) version src cargoHash;
+
+  __structuredAttrs = true;
 
   cargoBuildFlags = [
     "--bin"
@@ -33,11 +31,12 @@ rustPlatform.buildRustPackage {
 
   meta = {
     inherit (mdrop-cli.meta)
-      description
       homepage
       license
       maintainers
       ;
+    description = "Graphical interface for controlling Moondrop USB audio dongles";
     mainProgram = "mdrop-gui";
+    platforms = lib.platforms.unix;
   };
 }

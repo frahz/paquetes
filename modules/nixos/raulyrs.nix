@@ -1,4 +1,3 @@
-self:
 {
   lib,
   pkgs,
@@ -15,7 +14,7 @@ in
     enable = mkEnableOption "rauly.rs discord bot";
     package = mkOption {
       type = lib.types.package;
-      default = self.packages.${pkgs.stdenv.hostPlatform.system}.raulyrs;
+      default = pkgs.callPackage ../../pkgs/raulyrs/package.nix { };
       description = ''
         Package for rauly.rs discord bot
       '';

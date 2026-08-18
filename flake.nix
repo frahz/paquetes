@@ -9,6 +9,7 @@
       inherit (nixpkgs) lib;
 
       systems = [
+        "aarch64-linux"
         "x86_64-linux"
       ];
 
@@ -26,13 +27,15 @@
 
     in
     {
-      packages = forAllSystems (pkgs: import ./default.nix { inherit pkgs; });
-
-      nixosModules = import ./modules/nixos self;
-
-      formatter = forAllSystems (pkgs: pkgs.nixfmt-tree);
-
+      packages = forAllSystems (
+        pkgs:
+        lib.filterAttrs (
+          _: package: lib.isDerivation package && lib.meta.availableOn pkgs.stdenv.hostPlatform package
+        ) (import ./default.nix { inherit pkgs; })
+      );
       hydraJobs = self.packages;
+      overlays.default = _: prev: import ./default.nix { pkgs = prev; };
+      nixosModules = import ./modules/nixos;
 
       # thanks to isabelroses
       # https://github.com/tgirlcloud/pkgs/blob/91c9e8ac0711a036b9de1a1621fad42e1db4d5a7/flake.nix#L84
@@ -74,6 +77,7 @@
           ];
         };
       });
+      formatter = forAllSystems (pkgs: pkgs.nixfmt-tree);
     };
 
   nixConfig = {

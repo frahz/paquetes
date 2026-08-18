@@ -1,20 +1,15 @@
 {
   lib,
   rustPlatform,
-  pkg-config,
-  openssl,
-  yt-dlp,
-  libopus,
   nix-update-script,
   fetchFromGitHub,
-  ...
+  pkg-config,
+  openssl,
+  libopus,
 }:
-let
-  version = "0.2.1-unstable-2026-04-29";
-in
-rustPlatform.buildRustPackage {
+rustPlatform.buildRustPackage (finalAttrs: {
   pname = "raulyrs";
-  inherit version;
+  version = "0.2.1-unstable-2026-04-29";
 
   src = fetchFromGitHub {
     owner = "frahz";
@@ -25,9 +20,10 @@ rustPlatform.buildRustPackage {
 
   cargoHash = "sha256-pJecHr+Zkmou71MqFEWKD48kPFZvhvTApjWtRiwDnYY=";
 
+  __structuredAttrs = true;
+
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [
-    yt-dlp
     openssl
     libopus
   ];
@@ -40,10 +36,11 @@ rustPlatform.buildRustPackage {
   };
 
   meta = {
-    description = "rauly.rs discord bot";
+    description = "Discord bot written in Rust";
     homepage = "https://github.com/frahz/rauly.rs";
-    licenses = lib.licenses.mit;
+    license = lib.licenses.mit;
     maintainers = [ { name = "frahz"; } ];
     mainProgram = "raulyrs";
+    platforms = lib.platforms.linux;
   };
-}
+})

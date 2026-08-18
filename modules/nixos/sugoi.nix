@@ -1,6 +1,4 @@
-self:
 {
-  inputs,
   config,
   lib,
   pkgs,
@@ -16,20 +14,18 @@ in
     enable = mkEnableOption "sugoi daemon";
     package = mkOption {
       type = lib.types.package;
-      default = self.packages.${pkgs.stdenv.hostPlatform.system}.sugoi;
+      default = pkgs.callPackage ../../pkgs/sugoi/package.nix { };
     };
     port = mkOption {
       type = lib.types.port;
       default = 8080;
-      description = ''The Port which sugoi service will listen on.'';
+      description = "The port on which the sugoi service listens";
     };
+    openFirewall = mkEnableOption "opening sugoi's TCP port in the firewall";
   };
 
   config = mkIf cfg.enable {
-    networking.firewall = {
-      allowedTCPPorts = [ cfg.port ];
-      allowedUDPPorts = [ cfg.port ];
-    };
+    networking.firewall.allowedTCPPorts = mkIf cfg.openFirewall [ cfg.port ];
 
     systemd.services.sugoi = {
       description = "sugoi wakeup service";

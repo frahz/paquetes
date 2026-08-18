@@ -3,14 +3,10 @@
   rustPlatform,
   nix-update-script,
   fetchFromGitHub,
-  ...
 }:
-let
-  version = "0.4.0-unstable-2026-02-12";
-in
-rustPlatform.buildRustPackage {
+rustPlatform.buildRustPackage (finalAttrs: {
   pname = "mdrop-cli";
-  inherit version;
+  version = "0.4.0-unstable-2026-02-12";
 
   src = fetchFromGitHub {
     owner = "frahz";
@@ -34,10 +30,11 @@ rustPlatform.buildRustPackage {
   };
 
   meta = {
-    description = "Linux CLI tool for controlling Moondrop USB audio dongles.";
+    description = "CLI for controlling Moondrop USB audio dongles";
     homepage = "https://github.com/frahz/mdrop";
     license = lib.licenses.mit;
     maintainers = [ { name = "frahz"; } ];
     mainProgram = "mdrop";
+    platforms = lib.platforms.unix;
   };
-}
+})
