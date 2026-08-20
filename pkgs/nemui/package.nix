@@ -6,16 +6,16 @@
 }:
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "nemui";
-  version = "0.3.1";
+  version = "0.3.2";
 
   src = fetchFromGitHub {
     owner = "frahz";
     repo = "nemui";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-6LO9nFW4BlnAGYdWLnNugraswROeIpA62BLyClBwfOs=";
+    hash = "sha256-is/HGStyPKefxRMnIY4JZHHvRAzcyF+nkQeipkcQiwo=";
   };
 
-  cargoHash = "sha256-of66sIP27c5R9OndYZ0oWyE8IeImMLj7LLEBS9UHzoc=";
+  cargoHash = "sha256-ItZQ9e7sfCOCmk0hUxEWQnUdsCnEPWCGtrOE8/8OiRQ=";
 
   __structuredAttrs = true;
 
