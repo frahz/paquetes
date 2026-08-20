@@ -21,42 +21,71 @@ in
   };
 
   config = mkIf cfg.enable {
+    security.polkit = {
+      enable = true;
+      extraConfig = ''
+        polkit.addRule(function(action, subject) {
+          if (
+            subject.user === "nemui" &&
+            (
+              action.id === "org.freedesktop.login1.suspend" ||
+              action.id === "org.freedesktop.login1.suspend-multiple-sessions"
+            )
+          ) {
+            return polkit.Result.YES;
+          }
+        });
+      '';
+    };
+
     networking.firewall.allowedTCPPorts = mkIf cfg.openFirewall [ 8253 ];
 
     systemd.services.nemui = {
-      enable = true;
       description = "Nemui sleep service";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
+      path = [ pkgs.systemd ];
       serviceConfig = {
         Type = "simple";
-        # DynamicUser = true;
+        User = "nemui";
+        DynamicUser = true;
         ExecStart = lib.getExe cfg.package;
 
-        # AmbientCapabilities = [ "CAP_SYS_BOOT" ];
-        # CapabilityBoundingSet = [ "CAP_SYS_BOOT" ];
-        # LockPersonality = true;
-        # NoNewPrivileges = true;
-        # PrivateDevices = true;
-        # PrivateIPC = true;
-        # PrivateTmp = true;
-        # PrivateUsers = true;
-        # ProtectClock = true;
-        # ProtectControlGroups = true;
-        # ProtectHome = true;
-        # ProtectHostname = true;
-        # ProtectKernelLogs = true;
-        # ProtectKernelModules = true;
-        # ProtectKernelTunables = true;
-        # ProtectProc = "invisible";
-        # ProtectSystem = "strict";
-        # RestrictRealtime = true;
-        # SystemCallArchitectures = "native";
-        # SystemCallFilter = [
-        #   "@system-service"
-        #   "reboot"
-        # ];
-        # UMask = "0077";
+        CapabilityBoundingSet = "";
+        LockPersonality = true;
+        MemoryDenyWriteExecute = true;
+        NoNewPrivileges = true;
+        PrivateDevices = true;
+        PrivateIPC = true;
+        PrivateTmp = true;
+        ProtectClock = true;
+        ProtectControlGroups = true;
+        ProtectHome = true;
+        ProtectHostname = true;
+        ProtectKernelLogs = true;
+        ProtectKernelModules = true;
+        ProtectKernelTunables = true;
+        ProtectProc = "invisible";
+        ProtectSystem = "strict";
+        ProcSubset = "pid";
+        RemoveIPC = true;
+        RestrictAddressFamilies = [
+          "AF_INET"
+          "AF_INET6"
+          "AF_UNIX"
+        ];
+        RestrictNamespaces = true;
+        RestrictRealtime = true;
+        RestrictSUIDSGID = true;
+        SocketBindAllow = "tcp:8253";
+        SocketBindDeny = "any";
+        SystemCallArchitectures = "native";
+        SystemCallFilter = [
+          "@system-service"
+          "~@privileged"
+          "~@resources"
+        ];
+        UMask = "0077";
       };
     };
   };
