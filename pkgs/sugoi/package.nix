@@ -8,16 +8,16 @@
 }:
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "sugoi";
-  version = "0.5.2";
+  version = "0.5.3";
 
   src = fetchFromGitHub {
     owner = "frahz";
     repo = "sugoi";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-bST04v00t8Z2wfGPCFhZXy6shb8vUmDd3QKeYKkS8QE=";
+    hash = "sha256-7dl814ZQooLqTJXP/Ma+b2D/gIAZe/2m3mkFA4/a5T0=";
   };
 
-  cargoHash = "sha256-BFwDpa+/o5I0fzCZa6sstBSt7CSmofbNn5Z4/ZL5wRA=";
+  cargoHash = "sha256-9XIqBcbR4lsiEaAPpuqCo73Qix7+NA/ajcG0OoIdTr0=";
 
   __structuredAttrs = true;
 
