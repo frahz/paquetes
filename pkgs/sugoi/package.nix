@@ -4,6 +4,7 @@
   nix-update-script,
   fetchFromGitHub,
   makeWrapper,
+  pkg-config,
   sqlite,
   zstd,
 }:
@@ -22,7 +23,10 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   __structuredAttrs = true;
 
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [
+    pkg-config
+    makeWrapper
+  ];
   buildInputs = [
     sqlite
     zstd
