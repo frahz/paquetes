@@ -5,6 +5,7 @@
   fetchFromGitHub,
   makeWrapper,
   sqlite,
+  zstd,
 }:
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "sugoi";
@@ -22,7 +23,10 @@ rustPlatform.buildRustPackage (finalAttrs: {
   __structuredAttrs = true;
 
   nativeBuildInputs = [ makeWrapper ];
-  buildInputs = [ sqlite ];
+  buildInputs = [
+    sqlite
+    zstd
+  ];
 
   postInstall = ''
     install -Dm644 -t $out/share/${finalAttrs.pname} assets/*
