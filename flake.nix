@@ -47,7 +47,7 @@
               name = "update";
 
               runtimeInputs = [
-                pkgs.nix-update
+                pkgs.lixPackageSets.latest.nix-update
               ];
 
               text = lib.concatStringsSep "\n" (
@@ -73,7 +73,7 @@
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShellNoCC {
           packages = [
-            pkgs.nix-update
+            pkgs.lixPackageSets.latest.nix-update
           ];
         };
       });
